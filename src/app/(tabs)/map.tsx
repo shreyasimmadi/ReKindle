@@ -276,7 +276,9 @@ export default function MapScreen() {
                 ]}
               >
                 <View style={styles.cardHeaderRow}>
-                  <View style={[styles.needDot, { backgroundColor: needColor }]} />
+                  <View
+                    style={[styles.needDot, { backgroundColor: needColor }]}
+                  />
                   <Text style={styles.needLabel}>{loc.need} demand</Text>
                 </View>
                 <Text style={styles.cardTitle} numberOfLines={1}>

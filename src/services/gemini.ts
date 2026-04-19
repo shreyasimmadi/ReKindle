@@ -10,7 +10,7 @@ export async function analyzeDonation(base64Image: string) {
   try {
     // We use the direct 'models' access pattern required by the @google/genai types
     const response = await ai.models.generateContent({
-      model: "gemini-1.5-flash", // Flash is fastest for a live hackathon demo
+      model: "gemini-2.0-flash", // Flash is fastest for a live hackathon demo
       contents: [
         {
           role: "user",

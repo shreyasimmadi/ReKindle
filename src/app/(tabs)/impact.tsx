@@ -28,10 +28,26 @@ type ScanItem = {
 
 type ScanTrip = {
   id: string;
-  date: string; // ISO
+  date: string;
   status: "dropped_off" | "pending";
   location: string;
   items: ScanItem[];
+};
+
+const CATEGORY_ICONS: Record<string, string> = {
+  Electronics: "laptop-outline",
+  "Clothing & Accessories": "shirt-outline",
+  Furniture: "bed-outline",
+  "Books & Media": "book-outline",
+  Books: "book-outline",
+  Kitchenware: "restaurant-outline",
+  Appliances: "restaurant-outline",
+  "Toys & Games": "game-controller-outline",
+  "Home Decor": "home-outline",
+  Home: "home-outline",
+  "Tools & Hardware": "hammer-outline",
+  "Sports & Outdoors": "bicycle-outline",
+  "Baby & Kids": "happy-outline",
 };
 
 const UPCOMING: UpcomingDropOff[] = [
@@ -83,7 +99,7 @@ const HISTORY: ScanTrip[] = [
       {
         id: "i3",
         name: "Desk lamp",
-        category: "Home",
+        category: "Home Decor",
         credits: 0,
         dollars: 0,
       },
@@ -98,14 +114,14 @@ const HISTORY: ScanTrip[] = [
       {
         id: "i4",
         name: "Paperback books",
-        category: "Books",
+        category: "Books & Media",
         credits: 200,
         dollars: 20,
       },
       {
         id: "i5",
         name: "Kitchen mixer",
-        category: "Appliances",
+        category: "Kitchenware",
         credits: 200,
         dollars: 20,
       },
@@ -158,6 +174,7 @@ export default function ImpactScreen() {
     setOpenMenu(null);
     Alert.alert("Edit batch", "You can edit the items in this batch.");
   };
+
   const handleCancel = (id: string) => {
     setOpenMenu(null);
     Alert.alert(
@@ -264,9 +281,11 @@ export default function ImpactScreen() {
                 <Ionicons
                   name="close-circle-outline"
                   size={16}
-                  color="#5bc4f5"
+                  color="#ff4444"
                 />
-                <Text style={styles.menuText}>Cancel</Text>
+                <Text style={[styles.menuText, { color: "#ff4444" }]}>
+                  Cancel
+                </Text>
               </TouchableOpacity>
             </View>
           )}
@@ -283,6 +302,7 @@ export default function ImpactScreen() {
         const expanded = expandedTrip === t.id;
         const totalCredits = t.items.reduce((s, i) => s + i.credits, 0);
         const totalDollars = t.items.reduce((s, i) => s + i.dollars, 0);
+
         return (
           <View key={t.id} style={styles.historyCard}>
             <TouchableOpacity
@@ -352,7 +372,13 @@ export default function ImpactScreen() {
                 {t.items.map((it) => (
                   <View key={it.id} style={styles.itemRow}>
                     <View style={styles.itemThumb}>
-                      <Ionicons name="cube-outline" size={22} color="#5bc4f5" />
+                      <Ionicons
+                        name={
+                          (CATEGORY_ICONS[it.category] || "cube-outline") as any
+                        }
+                        size={22}
+                        color="#5bc4f5"
+                      />
                     </View>
                     <View style={{ flex: 1 }}>
                       <Text style={styles.itemName}>{it.name}</Text>
