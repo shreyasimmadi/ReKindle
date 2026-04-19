@@ -206,6 +206,9 @@ export default function GoodCycleScanner() {
       ) : (
         <CameraView style={styles.camera} ref={cameraRef}>
           <SafeAreaView style={styles.uiOverlay}>
+            <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
+              <Text style={styles.backButtonText}>← Back</Text>
+            </TouchableOpacity>
             <View style={styles.counterBadge}>
               <Text style={styles.scanInstruction}>{photoBatch.length === 0 ? "Point & Scan" : `${photoBatch.length} Photos Captured`}</Text>
             </View>
@@ -248,6 +251,21 @@ const styles = StyleSheet.create({
   confirmButton: { backgroundColor: '#4CAF50', paddingVertical: 16, borderRadius: 14, alignItems: 'center', marginBottom: 10 },
   overrideButton: { backgroundColor: '#FF9800', paddingVertical: 16, borderRadius: 14, alignItems: 'center', marginBottom: 10 },
   cancelButton: { backgroundColor: '#efefef', paddingVertical: 12, borderRadius: 14, alignItems: 'center' },
+  backButton: {
+    position: 'absolute',
+    top: 50,
+    left: 20,
+    backgroundColor: 'rgba(0,0,0,0.6)',
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 20,
+    zIndex: 10
+  },
+  backButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600'
+  },
   // ADDED INPUT STYLE
   input: {
     backgroundColor: '#f0f0f0',
